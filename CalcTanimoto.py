@@ -5,9 +5,17 @@
 
 '''
 usage: CalcTanimoto.py 
+
+This script calculates the Tanimoto score between two sets of molecules, given as SMILESs-strings.
+
+Remember to:
+- Define template and comparison csv file path below.
+- In template, enter SMILES which you want to be the starting point of your comparison
+- In comparison, enter SMILES which you want to compare with the the template set
+- Make sure the first row has "SMILES" as a header
+
 '''
 
-import rdkit
 from rdkit import Chem, DataStructs
 from rdkit.Chem.Fingerprints import FingerprintMols
 import pandas as pd
@@ -21,7 +29,6 @@ def CreateIterableLists(input_df):
     return fingerprint_list, smiles_list
 
 smiles_template_df =  pd.read_csv('./template_w_scaffold.csv', delimiter=";")
-print(smiles_template_df)
 smiles_comparison_df =  pd.read_csv('./comparison_set_w_scaffold.csv', delimiter=";")
 
 fp_template, smiles_template = CreateIterableLists(smiles_template_df)
